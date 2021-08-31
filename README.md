@@ -1,5 +1,5 @@
 # Discord JS ( Used Node.js )
-## AtBot Remake ( discord.py service stopped )
+## AtBot Remake ( discord.py service ended )
 - REMAKE with Node.js
 
 <div align="center">
