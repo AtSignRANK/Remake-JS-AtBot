@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AtSignRANK/JS-AtBot.git"
+    "url": "git+https://github.com/AtSignRANK/Remake-JS-AtBot.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AtSignRANK/JS-AtBot/issues"
+    "url": "https://github.com/AtSignRANK/Remake-JS-AtBot/issues"
   },
-  "homepage": "https://github.com/AtSignRANK/JS-AtBot#readme"
+  "homepage": "https://github.com/AtSignRANK/Remake-JS-AtBot#readme"
 }

@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 // const os = require('os');
 const fs = require('fs');
+// const time = require()
 
 const command_prefix = '/';
 
@@ -8,9 +9,15 @@ const client = new Discord.Client();
 
 const token = fs.readFileSync('C:\\Users\\USER\\Desktop\\VSC\\at_bot\\TOKEN.txt', 'utf8');
 const anonymityFileLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\anonymity.log';
+const banListLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\banlist.log';
 
 function writeAnonymityLog(data) {
-    fs.writeFileSync(anonymityFileLocation, data);
+    anonymitylog = fs.readFileSync(anonymityFileLocation, 'utf-8');
+    fs.writeFileSync(anonymityFileLocation, `${anonymitylog}\n${data}`);
+}
+
+function getBanList() {
+    return fs.readFileSync(banListLocation, 'utf-8').split();
 }
 
 client.on('ready', () => {
@@ -18,6 +25,11 @@ client.on('ready', () => {
 })
 
 client.on('message', msg => {
+    if (getBanList().includes(msg.author.id)) {
+        msg.channel.send(`You are banned!`);
+        return;
+    }
+    
     if (msg.content == `${command_prefix}discordjs`) {
         msg.channel.send('Discord JS. discord.py service ended!');
     } else if (msg.content == `${command_prefix}server`) {
@@ -25,7 +37,7 @@ client.on('message', msg => {
         embed.title = "**Show Server Of At Bot**";
         // embed.addField("**DISK**", `${os.freemem() / GB} GB / ${os.totalmem() / GB} GB`, true);
 
-        msg.channel.send(embed)
+        msg.channel.send(embed);
     } else if (msg.content.startsWith(`${command_prefix}익명`)) { // 익명 : anonymity
         msg.delete();
 
