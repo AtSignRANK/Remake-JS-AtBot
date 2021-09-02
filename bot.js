@@ -11,6 +11,8 @@ const token = fs.readFileSync('C:\\Users\\USER\\Desktop\\VSC\\at_bot\\TOKEN.txt'
 const anonymityFileLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\anonymity.log';
 const banListLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\banlist.log';
 
+const command_list = [`${command_prefix}discordjs`, `${command_prefix}server`, `${command_prefix}익명`]
+
 function writeAnonymityLog(data) {
     anonymitylog = fs.readFileSync(anonymityFileLocation, 'utf-8');
     fs.writeFileSync(anonymityFileLocation, `${anonymitylog}\n${data}`);
@@ -25,11 +27,13 @@ client.on('ready', () => {
 })
 
 client.on('message', msg => {
-    if (getBanList().includes(msg.author.id)) {
-        msg.channel.send(`You are banned!`);
-        return;
+    if (command_list.includes(msg.content)) {
+        if (getBanList().includes(msg.author.id)) {
+            msg.channel.send(`You are banned!`);
+            return;
+        }
     }
-    
+
     if (msg.content == `${command_prefix}discordjs`) {
         msg.channel.send('Discord JS. discord.py service ended!');
     } else if (msg.content == `${command_prefix}server`) {
