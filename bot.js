@@ -11,7 +11,8 @@ const token = fs.readFileSync('C:\\Users\\USER\\Desktop\\VSC\\at_bot\\TOKEN.txt'
 const anonymityFileLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\anonymity.log';
 const banListLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\banlist.log';
 
-const command_list = [`${command_prefix}discordjs`, `${command_prefix}server`, `${command_prefix}익명`]
+const command_list = [`${command_prefix}discordjs`, `${command_prefix}server`, `${command_prefix}익명`,
+`${command_prefix}password`]
 
 function writeAnonymityLog(data) {
     anonymitylog = fs.readFileSync(anonymityFileLocation, 'utf-8');
@@ -51,6 +52,13 @@ client.on('message', msg => {
         msg.channel.send(embed);
 
         writeAnonymityLog(`G [${msg.guild.id}] S [${msg.author.id}] ${msg.content.substring(4, msg.content.length)}`)
+    } else if (msg.content.startsWith(`${command_prefix}password`)) {
+        const password = fs.readFileSync('C:\\Users\\USER\\Desktop\\VSC\\at_bot\\password.txt', 'utf8')
+        if (msg.content.split(" ").length == 2 && msg.content.split(" ")[1] == password) {
+            msg.channel.send(":+1: It's Answer!")
+        } else {
+            msg.channel.send(":-1: It's not Answer!")
+        }
     }
 })
 
