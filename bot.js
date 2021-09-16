@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 // const os = require('os');
 const fs = require('fs');
-// const time = require()
+require('date-utils');
 
 const command_prefix = '/';
 
@@ -12,7 +12,7 @@ const anonymityFileLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\anonymity.
 const banListLocation = 'C:\\Users\\USER\\Desktop\\VSC\\at_bot\\banlist.log';
 
 const command_list = [`${command_prefix}discordjs`, `${command_prefix}server`, `${command_prefix}익명`,
-`${command_prefix}password`]
+`${command_prefix}password`, `${command_prefix}skin`, `${command_prefix}help`]
 
 function writeAnonymityLog(data) {
     anonymitylog = fs.readFileSync(anonymityFileLocation, 'utf-8');
@@ -59,6 +59,24 @@ client.on('message', msg => {
         } else {
             msg.channel.send(":-1: It's not Answer!")
         }
+    } else if (msg.content.startsWith(`${command_prefix}skin`)) {
+        const embed = new Discord.MessageEmbed();
+        const player = msg.content.slice(6, msg.content.length);
+        embed.title = `${player}'s Minecraft Skin`;
+        embed.setThumbnail(`https://mc-heads.net/head/${player}/left`);
+        embed.setImage(`https://mc-heads.net/body/${player}/left`);
+        var newDate = new Date();
+        var time = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');;
+        embed.setFooter(`${msg.author.username}#${msg.author.discriminator}`
+        + ` • ${time}`,
+        msg.author.avatarURL());
+
+        msg.channel.send(embed)
+    } else if (msg.content == `${command_prefix}help`) {
+        const embed = new Discord.MessageEmbed();
+        embed.setTitle("**Help**")
+
+        msg.channel.send(embed)
     }
 })
 
